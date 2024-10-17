@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Button from './Button';
-
+import { FaWhatsapp } from 'react-icons/fa';
+import { MdContactMail } from 'react-icons/md';
 const Card = ({ id, active, handleClick }) => {
   const isActive = active === id;
 
@@ -26,6 +27,28 @@ const Card = ({ id, active, handleClick }) => {
           <div className="flex flex-col justify-center items-center text-center px-4 mt-14 text-[#286181]">
             <h1 className="text-2xl font-semibold mb-2">Discover More</h1>
             <p className="text-lg leading-6">Explore exclusive offers in your area. Tap to learn more!</p>
+            <div className=''>
+            <Button 
+  text={
+    <div className="flex items-center justify-center">
+      <FaWhatsapp className="mr-2" />
+      Whatsapp
+    </div>
+  } 
+  className="bg-[#25D366] hover:bg-[#1DA851] text-white px-6 py-2 mt-2 rounded-full w-40 text-center shadow-md transition-all"
+/>
+
+<Button 
+  text={
+    <div className="flex items-center justify-center">
+      <MdContactMail className="mr-2" />
+      Contact
+    </div>
+  } 
+  className="bg-[#286181] hover:bg-[#1e4961] text-white px-6 py-2 mt-2 rounded-full w-40 text-center shadow-md transition-all"
+/>
+
+            </div>
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center gap-4 mt-28">

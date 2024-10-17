@@ -19,7 +19,7 @@ const Services = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeInOut' }}
       >
-        Our Services
+        Top Locations in India
       </motion.h1>
       
       <motion.h3 
@@ -55,29 +55,6 @@ const Services = () => {
         ))}
       </motion.div>
 
-      {/* Services Section */}
-      <motion.div 
-        className='w-auto py-4 px-6 mt-12 gap-10 border-2 border-[#286181] rounded-lg flex items-center justify-center'
-        initial={{ opacity: 0, scale: 0.9 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, ease: 'easeInOut', delay: 0.2 }}
-      >
-        {['Call Girls', 'Massages', 'Transsexual', 'Adult Meetings', 'Male Escorts'].map((service) => (
-          <div 
-            className='flex flex-col items-center justify-center cursor-pointer' 
-            onClick={() => handleImageClick('Delhi')} 
-            key={service}
-          >
-            <img 
-              src="https://i.pinimg.com/736x/27/72/fc/2772fcb68543a339d7da0e20d3a9b283.jpg"
-              className='w-32 h-32 rounded-lg object-cover'
-              alt={service}
-            />
-            <h1 className='mt-2 text-lg text-[#286181]'>{service}</h1>
-          </div>
-        ))}
-      </motion.div>
     </section>
   );
 };

@@ -17,7 +17,7 @@ const Home = () => {
           transition={{ duration: 0.8, ease: "easeOut" }} // Smooth and fast animation
         >
           <h1 className="font-bold text-4xl md:text-7xl text-center md:text-left w-full md:w-3/2 md:mb-0 mb-3">
-            Welcome to CGKeech – Your Trusted Platform for Authentic Call Girl Services
+            Welcome to CGKeech – Your Trusted Platform for Authentic <span className='text-[#A91B60]'>Bangalore</span> Call Girl Services
           </h1>
 
           <Button
