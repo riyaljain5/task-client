@@ -55,7 +55,22 @@ const mockData = [
   { id: 50, location: 'Kolkata', title: 'Meeting in Kolkata 10', description: 'This is a tenth meeting in Kolkata.' },
 ];
 
+const randomGirl = [
+ "https://r2.erweima.ai/imgcompressed/compressed_d62c7e3dcbf1e89efdba6cdce32a6f22.webp",
+ "https://imgcdn.stablediffusionweb.com/2024/3/17/b019dca0-958d-47d7-bb6f-bcb0a9fb2f1c.jpg",
+ "https://imgcdn.stablediffusionweb.com/2024/9/10/04d60c84-6edb-4e9a-b9f8-30fc9fd8f1d6.jpg",
+ "https://cdn.pixabay.com/photo/2024/08/06/10/41/ai-generated-8949005_1280.jpg",
+ "https://img.freepik.com/premium-photo/indian-girl_785565-2074.jpg" 
+]
+
+
+
 const cityOptions = ['Delhi', 'Mumbai', 'Pune', 'Chennai', 'Kolkata'];
+
+const getRandomGirlImage = (city) => {
+  const index = cityOptions.indexOf(city);
+  return randomGirl[index % randomGirl.length];
+};
 
 const AllCards = () => {
   const location = useLocation();
@@ -79,7 +94,6 @@ const AllCards = () => {
     city.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Handle card click to navigate to the Content page
   const handleCardClick = (card) => {
     navigate('/content', { state: { card } });
   };
@@ -106,9 +120,9 @@ const AllCards = () => {
   }, []);
 
   return (
-    <section className="flex flex-col items-center justify-center py-12 px-4 bg-white">
+    <section className="flex flex-col items-center justify-center py-12 px-4 bg-white w-full">
       <motion.h1
-        className="text-4xl md:text-6xl font-bold text-gray-800 mb-8"
+        className="text-3xl md:text-4xl lg:text-6xl font-bold text-gray-800 mb-8 text-center"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -154,12 +168,12 @@ const AllCards = () => {
         )}
       </div>
 
-      <div className="flex space-x-4 mb-6">
+      <div className="flex flex-wrap justify-center space-x-4 mb-6 w-full max-w-6xl">
         {cityOptions.map((city) => (
           <motion.button
             key={city}
             onClick={() => setSelectedLocation(city)}
-            className={`px-4 py-2 rounded-lg focus:outline-none transition duration-300 ${selectedLocation === city ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
+            className={`px-4 my-1 py-2 rounded-lg focus:outline-none transition duration-300 ${selectedLocation === city ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -168,7 +182,7 @@ const AllCards = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
         {filteredCards.slice(0, visibleCards).map((card) => (
           <motion.div
             key={card.id}
@@ -176,24 +190,24 @@ const AllCards = () => {
             onClick={() => handleCardClick(card)}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: card.id * 0.1 }}
+            transition={{ duration: 0.3}}
           >
             <img
-              src={`https://via.placeholder.com/300?text=Image+${card.id}`}
+              src={getRandomGirlImage(card.location)}
               alt={`Meeting ${card.id}`}
               className="object-cover w-full h-48"
             />
             <div className="p-4">
-              <h1 className="text-2xl font-bold mb-2">{card.title}</h1>
-              <p className="text-gray-600 text-lg">{card.description}</p>
+              <h1 className="text-lg font-bold mb-2">{card.title}</h1>
+              <p className="text-gray-600 text-base">{card.description}</p>
             </div>
           </motion.div>
         ))}
       </div>
 
       {visibleCards < filteredCards.length && (
-        <div id="load-more" className="mt-10">
-          <p className="text-center text-gray-600">Loading more meetings...</p>
+        <div id="load-more" className="mt-10 text-center">
+          <p className="text-gray-600">Loading more meetings...</p>
         </div>
       )}
     </section>

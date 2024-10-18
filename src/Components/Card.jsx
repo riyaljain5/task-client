@@ -7,7 +7,7 @@ const Card = ({ id, active, handleClick }) => {
   const isActive = active === id;
 
   return (
-    <section className="px-4 mb-6">
+    <section className="px-4 mb-6 md:m-0 ms-8">
       <img
         src="https://i.pinimg.com/736x/a7/5f/c1/a75fc15950775e62d20b5fb1fd5d613b.jpg"
         alt="Card Image"
@@ -15,7 +15,7 @@ const Card = ({ id, active, handleClick }) => {
       />
 
       <motion.div
-        className={`relative flex justify-center items-center w-[280px] ${
+        className={`relative flex justify-center md:p-0 md:m-0 items-center w-[280px] ${
           isActive ? 'h-[460px] bg-[#286181]' : 'h-[380px] bg-white'
         } rounded-[40px] overflow-hidden shadow-md transition-all duration-300`}
         onClick={() => handleClick(isActive ? null : id)}
