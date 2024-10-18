@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { motion } from 'framer-motion'; // Import framer-motion
-import Card from '../Components/Card'; 
-import { useNavigate } from 'react-router-dom'; 
+import { motion } from 'framer-motion';
+import Card from '../Components/Card';
+import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import Button from '../Components/Button';
 
@@ -26,14 +26,14 @@ const Explore = () => {
 
   return (
     <motion.section
-      className="flex flex-col items-center justify-center py-12 px-4 bg-gray-100 mt-16"
-      initial={{ opacity: 0, y: 50 }} // Start off invisible and slightly below
-      animate={{ opacity: 1, y: 0 }} // Smooth fade-in and ease-in animation
-      transition={{ duration: 0.8, ease: 'easeOut' }} // Timing for the animation
+      className="flex flex-col items-center justify-center py-12 md:px-4 mx-auto bg-gray-100 mt-16"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: 'easeOut' }}
     >
       {/* Animated Heading */}
       <motion.h1
-        className="text-4xl md:text-6xl font-bold text-gray-800 mb-4"
+        className="text-3xl md:text-6xl font-bold text-center text-gray-800 mb-4"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.1, ease: 'easeOut' }}
@@ -42,7 +42,7 @@ const Explore = () => {
       </motion.h1>
 
       <motion.h3
-        className="text-xl md:text-2xl text-gray-600 text-center mb-6"
+        className="text-lg md:text-2xl text-gray-600 text-center mb-2"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
@@ -51,9 +51,9 @@ const Explore = () => {
       </motion.h3>
 
       {/* Horizontal scrolling container */}
-      <div className="relative w-5/6">
+      <div className="relative w-full md:w-5/6">
         <button
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-[#286181] text-white p-4 z-20 rounded-full shadow z-10"
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-[#286181] text-white p-4 z-20 rounded-full shadow"
           onClick={() => smoothScroll('left')}
         >
           <FaArrowLeft />
@@ -63,21 +63,25 @@ const Explore = () => {
           className="flex overflow-x-auto space-x-8 py-4 scrollbar-hide snap-x snap-mandatory"
           style={{ scrollSnapType: 'x mandatory' }}
         >
-          {/* Render multiple Card components with animation */}
+          {/* Render multiple Card components with z-index and responsive adjustments */}
           {[1, 2, 3, 4, 5, 6, 7, 8].map((id, index) => (
             <motion.div
-              className="flex-shrink-0 w-1/4 snap-start"
+              className={`flex-shrink-0 ${active === id ? 'z-20' : 'z-10'} ${
+                // Full width on mobile, fixed width on large screens
+                active === id ? '' : 'sm:w-full md:w-[240px] lg:w-[280px]'
+              } snap-start`}
               key={id}
-              initial={{ opacity: 0, y: 50 }} // Cards start off below and invisible
-              animate={{ opacity: 1, y: 0 }} // Smooth fade-in and slide-in
-              transition={{ duration: 0.6, delay: 0.2 + index * 0.1, ease: 'easeOut' }} // Stagger animation
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 + index * 0.1, ease: 'easeOut' }}
+              style={{ zIndex: 8 - index }} // Decreasing z-index for each subsequent card
             >
               <Card id={id} active={active} handleClick={setActive} />
             </motion.div>
           ))}
         </div>
         <button
-          className="absolute p-4 right-0 top-1/2 transform -translate-y-1/2 bg-[#286181] text-white p-2 rounded-full shadow z-10"
+          className="z-10 absolute p-4 right-0 top-1/2 transform -translate-y-1/2 bg-[#286181] text-white p-2 rounded-full shadow"
           onClick={() => smoothScroll('right')}
         >
           <FaArrowRight />
@@ -96,8 +100,6 @@ const Explore = () => {
           className="mt-4 px-4 py-2 bg-[#286181] text-white rounded-lg"
         />
       </motion.div>
-
-      
     </motion.section>
   );
 };

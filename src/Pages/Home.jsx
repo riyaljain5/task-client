@@ -3,19 +3,19 @@ import Button from "../Components/Button";
 import Footer from "../Components/Footer";
 import Explore from "./Explore";
 import Services from "./Services";
-import image from "../assets/image.png";
+import image from "../assets/girlbed.jpeg";
 
 const Home = () => {
   return (
-    <section className="py-6 px-4">
+    <section className="">
       {/* Banner section with reduced image height */}
-      <div className="relative w-full h-[78vh] py-6 px-4 bg-lightblue flex items-center justify-center">
+      <div className="relative w-screen h-[78vh] py-6 px-4 bg-lightblue flex items-center justify-center" style={{backgroundImage: `url(${image})`, backgroundSize: "cover", backgroundPosition: "center"}}>
         {/* Image */}
-        <img
+        {/* <img
           src={image}
           alt="Banner"
-          className="absolute top-0 left-0 w-full h-full object-cover"
-        />
+          className="w-full h-full object-cover mx-auto"
+        /> */}
 
         {/* Centered search bar */}
         
@@ -34,7 +34,7 @@ const Home = () => {
           <input
             type="text"
             placeholder="Search for services..."
-            className="w-2/3 md:w-1/3 p-4 border-2 border-gray-300 bg-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-[#A91B60] focus:border-transparent"
+            className="w-2/3 md:w-1/3 p-4 border-2 border-gray-300 bg-white rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-[#A91B60] focus:border-transparent"
           />
         </div>
 
@@ -46,9 +46,11 @@ const Home = () => {
         </motion.div>
       </div>
 
+      <div className='w-screen'>
       <Explore />
       <Services />
       <Footer />
+      </div>
     </section>
   );
 };
